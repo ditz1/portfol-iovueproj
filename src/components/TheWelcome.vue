@@ -19,6 +19,15 @@ const register = {
   password: ref(''),
 };
 
+const displayUID = (uid) => {
+  var uiddis = document.getElementById('uiddisplay');
+  uiddis.textContent = "signed in as: " + uid;
+}
+const displayName = (name) => {
+  var namedis = document.getElementById('namedisplay');
+  namedis.textContent = "signed in as: " + name;
+}
+
 const handleLogin = () => {
   if (login.username.value && login.password.value) {
     loginCredentials(login.username.value, login.password.value);
@@ -33,6 +42,7 @@ const handleRegister = () => {
     console.log(`Registering with: ${register.username.value}`);
     createCredentials(register.username.value, register.password.value);
     getUserID(register.username.value);
+    
     // Implement real registration logic here
   }
 };
@@ -51,7 +61,8 @@ const getUserID = (name) => {
         if (data.status === 'success') {
             console.log("User found with UID:", data.data.uid);
             uid = data.data.uid;
-            console.log("user id:" +_data);
+            console.log("user id:" + uid);
+            displayUID(uid);
             //uidtext.textContent = "user id: " + uid;
             //loadFolioDisplay();
         } else if (data.status === 'error') {
@@ -104,6 +115,7 @@ const loginCredentials = (name, password) => {
         console.log(data + "test");
         if (data.trim() === "User signed in successfully!"){
             getUserID(name);
+            displayName(name);
             console.log("user signed in");
         }
     })
@@ -139,15 +151,22 @@ const loginCredentials = (name, password) => {
   <WelcomeItem>
     <template #icon>
       <ToolingIcon />
+      <br>
+      
     </template>
-    <template #heading>Tooling</template>
-  </WelcomeItem>
-
-  <WelcomeItem>
+      <template #heading>user id</template>
+      <div>
+        <h3 id="uiddisplay">not yet logged in</h3>
+      </div>
+    </WelcomeItem>
+    <WelcomeItem>
     <template #icon>
       <SupportIcon />
     </template>
-    <template #heading>Support Vue</template>
+    <template #heading>signed in as</template>
+    <div>
+      <h3 id="namedisplay">not yet logged in</h3>
+    </div>
   </WelcomeItem>
 </template>
 
