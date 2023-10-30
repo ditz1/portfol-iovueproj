@@ -11,13 +11,19 @@
 a,
 .green {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
+  color: rgb(192, 152, 255);
+  transition: 0.4s;
+}
+
+.purple {
+  text-decoration: none;
+  color: rgb(109, 17, 128);
   transition: 0.4s;
 }
 
 @media (hover: hover) {
   a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+    background-color: hsla(256, 100%, 37%, 0.2);
   }
 }
 
