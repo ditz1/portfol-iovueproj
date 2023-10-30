@@ -1,11 +1,15 @@
 <script setup>
-import { ref } from 'vue';
+
+var uid = 0;
+
+
+import { ref, defineEmits } from 'vue';
 import WelcomeItem from './WelcomeItem.vue';
 import DocumentationIcon from './icons/IconDocumentation.vue';
 import ToolingIcon from './icons/IconTooling.vue';
 import SupportIcon from './icons/IconSupport.vue';
 
-var uid = 0;
+const emits = defineEmits(['update:uid']);
 
 // Data for login
 const login = {
@@ -61,6 +65,7 @@ const getUserID = (name) => {
         if (data.status === 'success') {
             console.log("User found with UID:", data.data.uid);
             uid = data.data.uid;
+            emits('update:uid', uid);
             console.log("user id:" + uid);
             displayUID(uid);
             //uidtext.textContent = "user id: " + uid;
@@ -124,7 +129,6 @@ const loginCredentials = (name, password) => {
     });
 }
 </script>
-
 <template>
   <WelcomeItem>
     <template #icon>

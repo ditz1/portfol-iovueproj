@@ -1,6 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import TheWelcome from './components/TheWelcome.vue';
 </script>
 
 <template>
@@ -29,7 +30,22 @@ import HelloWorld from './components/HelloWorld.vue'
   </header>
 
   <RouterView />
+  <TheWelcome @update:uid="updateUID" />
 </template>
+<script>
+export default {
+  data() {
+    return {
+      uid: 0,
+    };
+  },
+  methods: {
+    updateUID(newUID) {
+      this.uid = newUID;
+    },
+  },
+};
+</script>
 
 <style scoped>
 header {
